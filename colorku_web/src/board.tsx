@@ -5,6 +5,8 @@ interface CellProps {
     value: number;
     isGiven: boolean;
     isSelected: boolean;
+    isNeighbor: boolean;
+    isMatch: boolean;
     onClick: () => void;
 }
 
@@ -20,10 +22,10 @@ export function Header({ datestring }: HeaderProps) {
     )
 }
 
-export function Cell({ value, isGiven, isSelected, onClick} : CellProps) {
+export function Cell({ value, isGiven, isSelected, isNeighbor, isMatch, onClick} : CellProps) {
     return (
-        <div className='cell' onClick={onClick}>
-            {value}
+        <div className={`cell ${isSelected ? 'selected' : ''} ${isNeighbor ? 'neighbor' : ''} ${isMatch ? 'match' : ''}`} onClick={onClick}>
+            {(value !== 0) && (value)}
         </div>
     )
 }
@@ -41,6 +43,16 @@ export function Board({ puzzle }: { puzzle : Puzzle }) {
                             value={value}
                             isGiven={puzzle.given[rowIdx][colIdx] !== 0}
                             isSelected={(selected?.row === rowIdx) && (selected?.col === colIdx)}
+                            isNeighbor={
+                                (selected !== null) && (
+                                    rowIdx === selected.row || colIdx === selected.col || 
+                                    ((Math.floor(rowIdx / 3) === Math.floor(selected.row / 3)) && (Math.floor(colIdx / 3) === Math.floor(selected.col / 3))) &&
+                                    !((rowIdx === selected.row) && (colIdx === selected.col))
+                                )
+                            }
+                            isMatch={
+                                (selected !== null) && (value !== 0) && (board[selected.row][selected.col] ===  value)
+                            }
                             onClick={() => {setSelected({ row: rowIdx, col: colIdx })}
                             }
                         />

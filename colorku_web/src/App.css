@@ -7,6 +7,18 @@
 
 .row { display: flex; }
 
+.neighbor {
+  background-color: #cdcdcd40;
+}
+
+.selected {
+  background-color: #cdcdcd;
+}
+
+.match {
+  background-color: #cdcdcd;
+}
+
 .board {
   position: relative;
   border: 3px solid black;
