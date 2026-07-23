@@ -3,6 +3,7 @@ import './App.css'
 import type { PuzzleData } from './types'
 import puzzleData from './data/puzzles.json'
 import { Board, Header } from './board'
+import { COLORS } from './colors'
 
 
 function App() {
