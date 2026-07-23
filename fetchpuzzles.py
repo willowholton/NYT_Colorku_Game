@@ -14,6 +14,7 @@ levels = ['easy', 'medium', 'hard']
 puzzle_data = {}
 puzzle_data['day'] = obj['easy']['day_of_week']
 puzzle_data['date'] = obj['easy']['print_date']
+puzzle_data['displayDate'] = obj['displayDate']
 
 for diff in levels:
     puzzle_data[diff] = {}
@@ -21,5 +22,5 @@ for diff in levels:
     puzzle_data[diff]['solution'] = [obj[diff]['puzzle_data']['solution'][i : i + 9] for i in range(0, 81, 9)]
 
 
-with open('src/data/puzzles.json', 'w') as f:
+with open('colorku_web/src/data/puzzles.json', 'w') as f:
     json.dump(puzzle_data, f, indent=2)

@@ -6,6 +6,7 @@ export interface Puzzle {
 export interface PuzzleData {
     day: string;
     date: string;
+    displayDate: string;
     easy: Puzzle;
     medium: Puzzle;
     hard: Puzzle;

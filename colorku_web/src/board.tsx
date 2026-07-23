@@ -8,9 +8,21 @@ interface CellProps {
     onClick: () => void;
 }
 
+interface HeaderProps {
+  datestring: string;
+}
+
+export function Header({ datestring }: HeaderProps) {
+    return (
+        <div className='header'>
+            {datestring}
+        </div>
+    )
+}
+
 export function Cell({ value, isGiven, isSelected, onClick} : CellProps) {
     return (
-        <div onClick={onClick}>
+        <div className='cell' onClick={onClick}>
             {value}
         </div>
     )
@@ -19,7 +31,6 @@ export function Cell({ value, isGiven, isSelected, onClick} : CellProps) {
 export function Board({ puzzle }: { puzzle : Puzzle }) {
     const [board, setBoard] = useState<number[][]>(puzzle.given)
     const [selected, setSelected] = useState<{ row: number; col: number} | null>(null)
-
     return (
         <div className='board'>
             {board.map((row, rowIdx) =>  (
@@ -30,11 +41,13 @@ export function Board({ puzzle }: { puzzle : Puzzle }) {
                             value={value}
                             isGiven={puzzle.given[rowIdx][colIdx] !== 0}
                             isSelected={(selected?.row === rowIdx) && (selected?.col === colIdx)}
-                            onClick={() => setSelected({ row: rowIdx, col: colIdx })}
+                            onClick={() => {setSelected({ row: rowIdx, col: colIdx })}
+                            }
                         />
                     ))}
                 </div>
             ))}
+        <div className='gridlines' />
         </div>
     )
 }
