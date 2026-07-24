@@ -11,13 +11,28 @@ function App() {
   const data: PuzzleData = puzzleData
   const datestring = data.day + ' ' + data.displayDate
 
-  const [currentPage, setCurrentPage] = useState<Page>('landing')
+  const [currentPage, setCurrentPage] = useState<Page>(() => {
+        const saved = localStorage.getItem('colorku-page')
+        if (saved === null) return 'landing'
 
-  if (currentPage === 'landing') {
-    return <LandingPage dateString={datestring} onSelectPage={setCurrentPage} />
+        const parsed = JSON.parse(saved)
+        if (parsed.date !== data.date) return 'landing'
+
+        return parsed.page
+    })
+
+  function goToPage(page: Page) {
+    setCurrentPage(page)
+    localStorage.setItem('colorku-page', JSON.stringify({ date: data.date, page }))
   }
-
-  return <Board puzzle={data[currentPage]} onBack={() => setCurrentPage('landing')} />
+  if (currentPage === 'landing'){
+    return (
+      <LandingPage dateString={datestring} onSelectPage={goToPage}/>
+    )
+  }
+  return (
+  <Board puzzle={data[currentPage]} onBack={() => goToPage('landing')} date={data.date} />
+  )
 }
 
 export default App

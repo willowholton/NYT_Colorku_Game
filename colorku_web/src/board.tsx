@@ -48,8 +48,17 @@ export function Cell({ value, isSelected, isNeighbor, isMatch, onClick} : CellPr
 
 
 
-export function Board({ puzzle, onBack }: { puzzle : Puzzle; onBack: () => void }) {
-    const [board, setBoard] = useState<number[][]>(puzzle.given)
+export function Board({ puzzle, date, onBack }: { puzzle : Puzzle; date: string, onBack: () => void }) {
+    const [board, setBoard] = useState<number[][]>(() => {
+        const saved = localStorage.getItem('colorku-progress')
+        if (saved === null) return puzzle.given
+
+        const parsed = JSON.parse(saved)
+        if (parsed.date !== date) return puzzle.given
+
+        return parsed.board
+    })
+
     const [selected, setSelected] = useState<{ row: number; col: number} | null>(null)
 
     function placeValue(colorNum: number) {
@@ -63,6 +72,7 @@ export function Board({ puzzle, onBack }: { puzzle : Puzzle; onBack: () => void 
             })
         })
         setBoard(newBoard)
+        localStorage.setItem('colorku-progress', JSON.stringify({ date: date, board: newBoard }))
     }
 
     return (
