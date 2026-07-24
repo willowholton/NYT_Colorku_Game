@@ -1,8 +1,38 @@
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #373737;
+  color: white;
+  cursor: pointer;
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.difficulty-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #373737;
+  color: white;
+  cursor: pointer;
+}
+
 .header {
   align-items: center;
-  justify-content: center;
-  display: flex;
+  font-size: 30px;
+  font-weight: 600;
   margin: 20px;
+  color: #373737;
 }
 .game {
   display: flex;

@@ -1,22 +1,23 @@
 import { useState } from 'react'
 import './App.css'
-import type { PuzzleData } from './types'
+import type { PuzzleData, Page } from './types'
+import { Board } from './board'
+import { LandingPage } from './landing'
 import puzzleData from './data/puzzles.json'
-import { Board, Header } from './board'
-import { COLORS } from './colors'
+
 
 
 function App() {
-  const [count, setCount] = useState(0)
   const data: PuzzleData = puzzleData
-  const dateString = data.day + ' ' + data.displayDate
-  console.log(data)
-  return (
-    <div className='app-container'>
-      <Header datestring={dateString} />
-      <Board puzzle={data.easy}/> 
-    </div>
-  )
+  const datestring = data.day + ' ' + data.displayDate
+
+  const [currentPage, setCurrentPage] = useState<Page>('landing')
+
+  if (currentPage === 'landing') {
+    return <LandingPage dateString={datestring} onSelectPage={setCurrentPage} />
+  }
+
+  return <Board puzzle={data[currentPage]} onBack={() => setCurrentPage('landing')} />
 }
 
 export default App

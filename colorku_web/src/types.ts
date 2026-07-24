@@ -11,3 +11,5 @@ export interface PuzzleData {
     medium: Puzzle;
     hard: Puzzle;
 }
+
+export type Page = 'landing' | 'easy' | 'medium' | 'hard';
