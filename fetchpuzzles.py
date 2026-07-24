@@ -22,5 +22,5 @@ for diff in levels:
     puzzle_data[diff]['solution'] = [obj[diff]['puzzle_data']['solution'][i : i + 9] for i in range(0, 81, 9)]
 
 
-with open('colorku_web/src/data/puzzles.json', 'w') as f:
+with open('Colorku/src/data/puzzles.json', 'w') as f:
     json.dump(puzzle_data, f, indent=2)
