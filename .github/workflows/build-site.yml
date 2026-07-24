@@ -23,17 +23,17 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        working-directory: colorku-web
+        working-directory: colorku_web
         run: npm ci
 
       - name: Build
-        working-directory: colorku-web
+        working-directory: colorku_web
         run: npm run build
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: colorku-web/dist
+          path: colorku_web/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
