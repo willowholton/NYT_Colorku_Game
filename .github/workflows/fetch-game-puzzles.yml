@@ -26,9 +26,9 @@ jobs:
           path: 'requirements.txt'
 
       - name: Run Python script
-        run: python3 sudoku.py
+        run: python3 fetchpuzzles.py
 
-      - name: Commit puzzle images
+      - name: Commit puzzle file
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
